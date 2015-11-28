@@ -18,7 +18,7 @@ public class Tester {
 
 	public static SPanel panel;
 	
-	public static SFrame frame;
+	public SFrame frame;
 
 	/**
 	 * Launch the application.
