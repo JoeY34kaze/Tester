@@ -17,8 +17,10 @@ import javax.swing.JPanel;
 public class Tester {
 
 	public static SPanel panel;
+	public static Izpisi_panel panel2;
 	
 	public SFrame frame;
+	public Izpisi_Frame frame2;
 
 	/**
 	 * Launch the application.
@@ -29,6 +31,7 @@ public class Tester {
 				try {
 					Tester window = new Tester();
 					window.frame.setVisible(true);
+					window.frame2.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +53,7 @@ public class Tester {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//1. okno
 		frame = new SFrame();
 		frame.setBounds(100, 100, 600, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +75,20 @@ public class Tester {
 		
 		panel = new SPanel(frame);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		
+		//2.okno
+		frame2= new Izpisi_Frame();
+		frame2.setBounds(100, 100, 600, 300);
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel2=new Izpisi_panel();
+		frame2.getContentPane().add(panel2, BorderLayout.CENTER);
+		
+		
+		
+		
+		
+		
 	}
 
 }
