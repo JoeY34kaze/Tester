@@ -21,6 +21,7 @@ public class Tester {
 	
 	public SFrame frame;
 	public Izpisi_Frame frame2;
+	public static Test t;
 
 	/**
 	 * Launch the application.
@@ -30,8 +31,8 @@ public class Tester {
 			public void run() {
 				try {
 					Tester window = new Tester();
-					window.frame.setVisible(true);
 					window.frame2.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,6 +48,7 @@ public class Tester {
 	 */
 	public Tester() {
 		initialize();
+		t=new Test();
 	}
 
 	/**

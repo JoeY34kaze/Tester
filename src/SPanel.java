@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 public class SPanel extends JPanel implements Runnable, KeyListener{
 	private Thread thread;
 	
-	boolean a,s,d,f;
+	boolean a,s,d,f; // sporoci kter je pritisnjen
+	public boolean pa,ps,pd,pf;//pravilni pritiski, ki jih task zahteva. ko se zaporedje ujema z asdf je izziv pravilno rešen.
 	
 	
 	
@@ -62,16 +63,32 @@ public class SPanel extends JPanel implements Runnable, KeyListener{
 
 	
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.WHITE);
+    	/* Risanje testa */
         Dimension dim=this.getSize();
         int h=dim.height;
         int w=dim.width;
-        if(a){g.setColor(Color.RED);g.fillRect(0, 0,w/4+1,h);}
-        if(s){g.setColor(Color.GREEN);g.fillRect(w/4, 0,w/4+1,h);}
-        if(d){g.setColor(Color.BLUE);g.fillRect(w/2, 0,w/4+1,h);}
-        if(f){g.setColor(Color.MAGENTA);g.fillRect(3*w/4, 0,w/4+1,h);}
-        g.setColor(Color.WHITE);
+        super.paintComponent(g);
+        if(Tester.t.konec){
+        	g.setColor(Color.BLACK);
+        	g.fillRect(0, 0, w, h);
+        }else{
+	        g.setColor(Color.WHITE);
+
+	        if(pa){g.setColor(Color.RED);g.fillRect(0, 0,w/4+1,h);}
+	        if(ps){g.setColor(Color.GREEN);g.fillRect(w/4, 0,w/4+1,h);}
+	        if(pd){g.setColor(Color.BLUE);g.fillRect(w/2, 0,w/4+1,h);}
+	        if(pf){g.setColor(Color.MAGENTA);g.fillRect(3*w/4, 0,w/4+1,h);}
+	        g.setColor(Color.WHITE);
+	        
+	        if(this.passed(a, s, d, f, pa, ps, pd, pf)){
+	        	System.out.println("passed");
+	        	Tester.t.advance();
+	        }
+        }
+
+        
+        
+        
     }
 
 	public void run() {//tle je vse
@@ -96,5 +113,8 @@ public class SPanel extends JPanel implements Runnable, KeyListener{
 		
 	}
 	
+	private boolean passed(boolean a,boolean s,boolean d,boolean f,boolean pa,boolean ps,boolean pd,boolean pf){
+		return ((a==pa) && (s==ps) && (d==pd) && (f==pf)); // i think this should work
+	}
 	
 }
