@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 
@@ -13,6 +15,9 @@ public class Test {
 	private int tezavnostna_stopnja=0;
 	private int iteracija=0;
 	public boolean konec;
+	public boolean prvi_pritisk=true;
+	private String izpis;
+	public double tStart=System.currentTimeMillis();
 	private int prejsnji=-1;//najmanjsi indeks prejsnjega testa
 	
 	
@@ -26,6 +31,12 @@ public class Test {
 	}
 
 	public void advance() {//pobrise prejsnji test in napreduje
+		this.dodaj("p");
+		this.dodaj("cas:"+(System.currentTimeMillis()-tStart));
+		//System.out.println("cas: "+(System.currentTimeMillis()-tStart));
+		tStart=System.currentTimeMillis();
+		
+		
 		Tester.panel.pa=false;
 		Tester.panel.ps=false;
 		Tester.panel.pd=false;
@@ -33,9 +44,10 @@ public class Test {
 		iteracija++;
 		if(iteracija==20){iteracija=0; tezavnostna_stopnja++;}
 		if(tezavnostna_stopnja==6){konec=true; tezavnostna_stopnja=0;}
-		if(konec){System.out.println("KONc TESTA gg wp no re noscope");}
 		else{
 			this.create_iteration();
+			this.dodaj("ts:"+tezavnostna_stopnja);
+			this.dodaj("it:"+iteracija);
 		}
 	}
 	
@@ -50,7 +62,7 @@ public class Test {
 			if(r==1){Tester.panel.ps=true;}
 			if(r==2){Tester.panel.pd=true;}
 			if(r==3){Tester.panel.pf=true;}
-			System.out.println("Creating iteration: "+r);
+			
 		}
 		else if(tezavnostna_stopnja==1){//1 cifra med 0-3
 			prejsnji=-1;//zato da naslednji if dela normalno
@@ -58,7 +70,7 @@ public class Test {
 			if(r==1){Tester.panel.ps=true;}
 			if(r==2){Tester.panel.pd=true;}
 			if(r==3){Tester.panel.pf=true;}
-			System.out.println("Creating iteration: "+r);
+			
 		}else if(tezavnostna_stopnja==2){//zaporedje 01 12 23 30 01 12 23...
 			prejsnji++;
 			if(prejsnji==4){prejsnji=0;}
@@ -67,7 +79,7 @@ public class Test {
 			if(r==1){Tester.panel.ps=true;Tester.panel.pd=true;}
 			if(r==2){Tester.panel.pd=true;Tester.panel.pf=true;}
 			if(r==3){Tester.panel.pf=true;Tester.panel.pa=true;}
-			System.out.println("Creating iteration: "+r+"sosednji desni");
+			
 		}
 		else if(tezavnostna_stopnja==3){//2 cifri
 			int x=r;
@@ -79,7 +91,7 @@ public class Test {
 			if(r==1 || x==1){Tester.panel.ps=true;}
 			if(r==2 || x==2){Tester.panel.pd=true;}
 			if(r==3 || x==3){Tester.panel.pf=true;}
-			System.out.println("Creating iteration: "+r+" "+x);
+			
 		}else{ // 3 cifre
 			int x=r;
 			r=ra.nextInt(4);
@@ -95,9 +107,22 @@ public class Test {
 			if(r==1 || x==1 || y==1){Tester.panel.ps=true;}
 			if(r==2 || x==2 || y==2){Tester.panel.pd=true;}
 			if(r==3 || x==3 || y==3){Tester.panel.pf=true;}
-			System.out.println("Creating iteration: "+r+" "+x+" "+r);
+			
 		}
 		
 	}
 
+	public void dodaj(String x){this.izpis+=x+"\n";}
+	
+	public void izpisi(){
+		System.out.println(izpis);
+	}
+	
+	public void toFile() throws FileNotFoundException{
+		PrintWriter out = new PrintWriter("out.txt");
+		out.println(this.izpis);
+		System.out.println(izpis);
+		out.close();
+	}
+	
 }
