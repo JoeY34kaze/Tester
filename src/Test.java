@@ -1,5 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -115,14 +122,30 @@ public class Test {
 	public void dodaj(String x){this.izpis+=x+"\n";}
 	
 	public void izpisi(){
-		System.out.println(izpis);
+		//System.out.println(izpis);
 	}
 	
-	public void toFile() throws FileNotFoundException{
-		PrintWriter out = new PrintWriter("out.txt");
-		out.println(this.izpis);
-		System.out.println(izpis);
+	public void toFile() throws IOException{
+		
+		
+		Date date = new Date() ;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;
+		File file = new File(dateFormat.format(date) + ".txt") ;
+		BufferedWriter out = new BufferedWriter(new FileWriter(file));
+		out.write(this.izpis);
 		out.close();
+		
+		/*
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		String s=dateFormat.format(date);
+		PrintWriter out = new PrintWriter("x.txt");
+		out.println(this.izpis);
+		//System.out.println(izpis);
+		out.close();
+		*/
 	}
 	
 }

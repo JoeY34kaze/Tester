@@ -17,10 +17,10 @@ import javax.swing.JPanel;
 public class Tester {
 
 	public static SPanel panel;
-	public static Izpisi_panel panel2;
+
 	
 	public SFrame frame;
-	public Izpisi_Frame frame2;
+
 	public static Test t;
 
 	/**
@@ -31,7 +31,6 @@ public class Tester {
 			public void run() {
 				try {
 					Tester window = new Tester();
-					window.frame2.setVisible(true);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,15 +76,7 @@ public class Tester {
 		
 		panel = new SPanel(frame);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		
-		//2.okno
-		frame2= new Izpisi_Frame();
-		frame2.setBounds(100, 100, 600, 300);
-		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		panel2=new Izpisi_panel();
-		frame2.getContentPane().add(panel2, BorderLayout.CENTER);
-		
+
 		
 		
 		

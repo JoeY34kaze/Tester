@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -77,13 +78,15 @@ public class SPanel extends JPanel implements Runnable, KeyListener{
         	g.setColor(Color.BLACK);
         	g.fillRect(0, 0, w, h);
 			//System.out.println("KONc TESTA gg wp no re noscope");
+		
 			try {
 				Tester.t.toFile();
-				System.out.println("print ok");
-			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+
 			System.exit(1);
         }else{
 	        g.setColor(Color.WHITE);
